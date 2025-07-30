@@ -8,6 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+backend/node_modules
 dist
 dist-ssr
 *.local
@@ -24,5 +25,6 @@ dist-ssr
 *.sw?
 
 # Environment variables
-backend/.env
-.env.*
+*.env
+backend/*.env
+**/.env
