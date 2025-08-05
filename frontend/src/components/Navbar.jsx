@@ -38,7 +38,7 @@ export default function Navbar () {
         </div>
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="overflow-hidden">
         <SidebarGroup>
           <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarMenu>
@@ -74,8 +74,10 @@ export default function Navbar () {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="px-4 py-2 text-sm text-center">
-        © 2025 MyApp
+      <SidebarFooter className="px-4 py-2 text-sm text-center inline">
+        <div className="flex justify-center">
+          ©{open && <span className="ml-1 transition">2025 MyApp</span>}
+        </div>
       </SidebarFooter>
     </Sidebar>
   )

@@ -12,8 +12,9 @@ import GoalsPage from './pages/GoalsPage'
 
 
 const App = () => {
-  const { user } = useAuthContext();
-  console.log(user);
+  const { user, loading } = useAuthContext();
+
+  if (loading) {return null}
   return (
     <div className='h-screen w-full overflow-hidden'>
       <div className='flex h-full w-full'>

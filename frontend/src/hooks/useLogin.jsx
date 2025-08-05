@@ -7,7 +7,6 @@ export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { dispatch } = useAuthContext()
   const API_URL = import.meta.env.VITE_API_URL;
-  console.log(API_URL)
 
   const login = async (email, password) => {
     setIsLoading(true)

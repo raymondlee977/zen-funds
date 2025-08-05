@@ -1,22 +1,22 @@
-import React, { createContext, useReducer, useEffect, useState } from 'react'
+import React, { createContext, useReducer, useEffect, useState } from "react";
 
-export const AuthContext = createContext()
+export const AuthContext = createContext();
 
 export const authReducer = (state, action) => {
   switch (action.type) {
-    case 'LOGIN':
-      return { user: action.payload }
-    case 'LOGOUT':
-      return { user: null }
+    case "LOGIN":
+      return { user: action.payload };
+    case "LOGOUT":
+      return { user: null };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(authReducer, {
-    user: null
+    user: null,
   });
 
   useEffect(() => {
@@ -25,17 +25,19 @@ export const AuthContextProvider = ({ children }) => {
 
       if (storedUser) {
         try {
-          const response = await fetch(`http://localhost:4000/api/user/${storedUser.email}`, {
-              headers: { 
-                Authorization: `Bearer ${storedUser.token}` 
+          const response = await fetch(
+            `http://localhost:4000/api/user/${storedUser.email}`,
+            {
+              headers: {
+                Authorization: `Bearer ${storedUser.token}`,
               },
-            });
+            }
+          );
 
           if (response.ok) {
             const updatedUser = await response.json();
             localStorage.setItem("user", JSON.stringify(updatedUser)); // Update local storage
             dispatch({ type: "LOGIN", payload: updatedUser }); // Update context
-           
           }
         } catch (error) {
           console.error("Failed to fetch user data:", error);
@@ -47,10 +49,9 @@ export const AuthContextProvider = ({ children }) => {
     fetchUserData();
   }, []);
 
-
   return (
-    <AuthContext.Provider value={{...state, dispatch, loading}}>
-      { children }
+    <AuthContext.Provider value={{ ...state, dispatch, loading }}>
+      {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
